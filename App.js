@@ -5,11 +5,12 @@ import {Provider} from './src/context/BlogContext'
 import IndexScreen from './src/screen/IndexScreen'
 import ShowScreen from './src/screen/ShowScreen'
 import CreateScreen from './src/screen/CreateScreen'
-
+import EditScreen from './src/screen/EditScreen'
 const navigator =createStackNavigator({
       Index:IndexScreen,
       Show:ShowScreen,
-      Create:CreateScreen
+      Create:CreateScreen,
+      Edit:EditScreen
 },{
   initialRouteName:'Index',
   defaultNavigationOptions:{

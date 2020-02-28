@@ -16,16 +16,16 @@ const ShowScreen = ({ navigation }) => {
         </View>
     )
 }
-ShowScreen.navigationOptions=()=>{
+ShowScreen.navigationOptions=({navigation})=>{
     return{
-        headerRight:()=> <TouchableOpacity>
+        headerRight:()=> <TouchableOpacity onPress={()=>navigation.navigate('Edit')}>
             <EvilIcons name='pencil'/>
         </TouchableOpacity>
     }
 }
 
 const styles = StyleSheet.create({
-
+   
 })
 
 export default ShowScreen
