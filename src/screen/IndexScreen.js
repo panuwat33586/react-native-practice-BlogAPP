@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Context } from '../context/BlogContext'
-import { View, StyleSheet, Text, FlatList, Button,TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, FlatList, Button, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
-const IndexScreen = () => {
-    const { state, addBlogPost,deleteBlogPost } = useContext(Context)
+const IndexScreen = ({ navigation }) => {
+    const { state, addBlogPost, deleteBlogPost } = useContext(Context)
     return (
         <View>
             <Button
@@ -16,12 +16,14 @@ const IndexScreen = () => {
                 keyExtractor={blogPost => blogPost.title}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.row}>
-                            <Text style={styles.title}>{item.title}-{item.id}</Text>
-                            <TouchableOpacity onPress={()=>deleteBlogPost(item.id)}>
-                            <Feather style={styles.icon} name= 'trash'/>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity onPress={()=>navigation.navigate('Show',{id:item.id})}>
+                            <View style={styles.row}>
+                                <Text style={styles.title}>{item.title}-{item.id}</Text>
+                                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                                    <Feather style={styles.icon} name='trash' />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
                     )
                 }}
             />
@@ -29,20 +31,28 @@ const IndexScreen = () => {
     )
 }
 
+IndexScreen.navigationOptions=({navigation})=>{
+    return{
+        headerRight:()=><TouchableOpacity onPress={()=>navigation.navigate('Create')}>
+        <Feather name='plus' size={30}/>
+        </TouchableOpacity>
+    }
+}
+
 const styles = StyleSheet.create({
     row: {
-        flexDirection:'row',
-        justifyContent:'space-between',
-        paddingVertical:20,
-        paddingHorizontal:10,
-        borderTopWidth:1,
-        borderColor:'gray'
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        borderTopWidth: 1,
+        borderColor: 'gray'
     },
-    title:{
-        fontSize:18
+    title: {
+        fontSize: 18
     },
-    icon:{
-        fontSize:24
+    icon: {
+        fontSize: 24
     }
 })
 
