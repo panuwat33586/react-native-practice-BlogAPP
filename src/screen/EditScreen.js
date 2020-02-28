@@ -6,7 +6,7 @@ const EditScreen = ({navigation}) => {
     
     return (
         <View>
-            
+            <Text>This is edit screen</Text>
         </View>
     )
 }
