@@ -27,12 +27,12 @@ const getBlogPosts =(dispatch)=>{
 const addBlogPost = (dispatch) => {
     return async(title,content,callback) => {
         await jsonServer.post('/blogposts',{title,content})
-        // dispatch({ type: 'add_blogpost',payload:{title,content} });
         callback()
     }
 }
 const deleteBlogPost = (dispatch) => {
-    return (id) => {
+    return async(id) => {
+        await jsonServer.delete(`/blogposts/${id}`)
         dispatch({ type: 'delete_blogpost', payload: id })
     }
 }
